@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { SignupModule } from './signup/signup.module';
 import { ListModule } from './list/list.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
