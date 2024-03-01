@@ -19,7 +19,4 @@ export class SignupController {
     login(@Body()LoginDto:LoginDto){
         return this.SignupService.login(LoginDto)
     }
-
-
 }
-

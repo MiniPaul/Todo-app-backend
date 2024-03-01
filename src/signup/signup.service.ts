@@ -5,6 +5,7 @@ import { UserSignupModel } from './signup.model';
 import * as bcrypt from 'bcrypt'
 import { SignupDto } from './signup.dto';
 import { LoginDto } from './login.dto';
+import * as jwt from 'jsonwebtoken';
 
 
 @Injectable()
@@ -31,21 +32,19 @@ export class SignupService {
           }
         }
 
-    async login(login:LoginDto){
-
-        const validuser = await this.userSignupModel.findOne({email:login.email})
-        if(!validuser){
-            return {"status":"failed","error":"User not found"}
-        }
-
-        const validPassword = await bcrypt.compare(login.password,validuser.password)
-        if(!validPassword){
-            return {"status":"failed","error":"Invalid password"}
-        }
-        return {"Message":"Successfully logged in","user":validuser.name}
-    }
-        
-    }
-
-
-        
+        async login(login: LoginDto){
+            const validuser = await this.userSignupModel.findOne({ email: login.email });
+            if (!validuser) {
+                return { "status": "failed", "error": "User not found" };
+            }
+    
+            const validPassword = await bcrypt.compare(login.password, validuser.password);
+            if (!validPassword) {
+                return { "status": "failed", "error": "Invalid password" };
+            }
+    
+            const token = jwt.sign({ email: login.email }, 'hello123', { expiresIn: '1h' });
+    
+            return { "status": "success", "message": "Successfully logged in", "token": token };
+        }     
+}
