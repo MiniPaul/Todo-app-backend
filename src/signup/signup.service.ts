@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UserSignupModel } from './signup.model';
-import * as bcrypt from 'bcrypt'
+import * as bcrypt from 'bcrypt';
 import { SignupDto } from './signup.dto';
 import { LoginDto } from './login.dto';
 import * as jwt from 'jsonwebtoken';
@@ -44,7 +44,8 @@ export class SignupService {
             }
     
             const token = jwt.sign({ email: login.email }, 'hello123', { expiresIn: '1h' });
-    
-            return { "status": "success", "message": "Successfully logged in", "token": token };
-        }     
+
+            return { "status": "success", "message": "Successfully logged in", "token": token ,"user":validuser.name,"Id":validuser._id};
+            
+        }         
 }
