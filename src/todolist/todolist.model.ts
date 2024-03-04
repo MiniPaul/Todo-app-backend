@@ -1,12 +1,12 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document,Types } from "mongoose";
-
+import { Document,SchemaTypes,Types } from "mongoose";
+import { UserSignupModel } from "src/signup/signup.model";
 
 @Schema()
 export class TodoList{
 
-    @Prop({ type: Types.ObjectId })
-    id: Types.ObjectId;
+    @Prop({ type: SchemaTypes.ObjectId, ref: 'UserSignup' }) 
+    userid: UserSignupModel;
 
     @Prop()
     list:string;
@@ -19,4 +19,4 @@ export class TodoList{
 }
 
 export type TodoListModel = TodoList & Document
-export const TodoListSchema = SchemaFactory.createForClass(TodoList)
+export const TodoListSchema = SchemaFactory.createForClass(TodoList)    
