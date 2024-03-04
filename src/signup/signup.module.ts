@@ -11,7 +11,7 @@ import { UserSignupSchema } from './signup.model';
         name:"UserSignup",
         schema:UserSignupSchema
       }
-    ]  
+    ] 
   )],
   controllers: [SignupController],
   providers: [SignupService]
