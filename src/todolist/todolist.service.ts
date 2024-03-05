@@ -25,6 +25,7 @@ export class TodolistService {
             return {"message":"Error"}
         }
     }   
+
     async viewMyList(view: ViewListDto){
         try {
             const viewList = await this.todoListModel.find({ userid: view.userid });
@@ -38,4 +39,21 @@ export class TodolistService {
             return { message: "Error" };
         }
     }
+
+    async deleteListItem(listItemId: string) {
+        try {
+            const deletedItem = await this.todoListModel.findByIdAndDelete(listItemId);
+            if (deletedItem) {
+                return { message: "Item deleted successfully" };
+            } else {
+                return { message: "Item not found" };
+            }
+        } catch (error) {
+            console.log(error);
+            return { message: "Error deleting item" };
+        }
+    }
+
+
+
 }
