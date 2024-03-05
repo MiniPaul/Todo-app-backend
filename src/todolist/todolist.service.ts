@@ -15,9 +15,7 @@ export class TodolistService {
     async addlist(list:TodoListDto){
         const newList =new this.todoListModel({
             userid:list.userid,
-            list:list.list,
-            name:list.name,
-            email:list.email
+            list:list.list
         })
         try {
             await newList.save()
@@ -29,7 +27,7 @@ export class TodolistService {
     }   
     async viewMyList(view: ViewListDto){
         try {
-            const viewList = await this.todoListModel.find({ id: view.userid });
+            const viewList = await this.todoListModel.find({ userid: view.userid });
             if (viewList) {
                 return viewList
             } else {
