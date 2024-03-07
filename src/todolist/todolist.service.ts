@@ -26,6 +26,7 @@ export class TodolistService {
         }
     }   
 
+
     async viewMyList(view: ViewListDto){
         try {
             const viewList = await this.todoListModel.find({ userid: view.userid });
